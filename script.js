@@ -1,5 +1,5 @@
-const canvas = document.getElementById('canvas');
-const context = canvas.getContext('2d');
+const targetFPS = 60;
+var currentFrame = 0;
 
 // resize the canvas to fill browser window dynamically
 window.addEventListener('resize', resizeCanvas, false);
@@ -7,20 +7,15 @@ window.addEventListener('resize', resizeCanvas, false);
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    /**
-     * Your drawings need to be inside this function otherwise they will be reset when 
-     * you resize the browser window and the canvas goes will be cleared.
-     */
     drawStuff();
+    currentFrame++;
 }
 
-resizeCanvas();
 
 function drawStuff() {
     var width = window.innerWidth;
     var height = window.innerHeight;
-    context.moveTo(0, 0);
-    context.lineTo(width, height);
-    context.stroke();
+    drawRectangle(context, "orange",currentFrame * 5,height / 2, 50, 50);
 }
+
+setInterval(resizeCanvas,1000 / targetFPS)
